@@ -26,7 +26,7 @@
         $(".next-thread").css({
             "background":"rgba(0,0,0,0.5)",
             "color":"#fff",
-            "padding":"10px",
+            "padding":"10px 13px",
             "border-radius":"100px",
             "position":"fixed",
             "bottom":"50px",
@@ -34,7 +34,6 @@
             "font-size":"20px",
             "text-align":"center",
             "display":"inline-block",
-            "width":"24px",
             "transition":"0.4s",
             "transform":"translate(0px,0px)"
             //"":""
@@ -44,14 +43,14 @@
             $(".next-thread").css({
                 "background":"rgba(0,0,0,0.8)",
                 "color":"#ddd",
-                "padding":"12px",
-                "transform":"translate(1px,1px)"
+                "padding":"12px 15px",
+                "transform":"translate(2px,2px)"
             });
         }, function(){
             $(".next-thread").css({
                 "background":"rgba(0,0,0,0.5)",
                 "color":"#fff",
-                "padding":"10px",
+                "padding":"10px 13px",
                 "transform":"translate(0px,0px)"
             });
         });
