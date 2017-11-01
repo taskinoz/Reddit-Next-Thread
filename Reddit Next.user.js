@@ -15,6 +15,7 @@
     var threads, current, scrolllocation;
     var postracker = 0;
     var idArray = ["buffer"];
+    var heightArray = ["buffer"];
 
     //Add Fontawesome and Next Arrow
     if (($(".sitetable.nestedlisting > .thing").length)>=1){
@@ -35,7 +36,8 @@
             "text-align":"center",
             "display":"inline-block",
             "transition":"0.4s",
-            "transform":"translate(0px,0px)"
+            "transform":"translate(0px,0px)",
+            "z-index":"1000000"
             //"":""
         });
 
@@ -63,9 +65,11 @@
     current = $(".sitetable.nestedlisting > .thing");
     for (var i=1;i<=threads;i++){
         idArray.push($(current).attr("id"));
+        heightArray.push($("#"+($(current).attr("id"))).position().top);
         current = $(current).next().next();
     }
-    //console.log(idArray);
+    console.log(idArray);
+    console.log(heightArray);
     $(document).ready(function(){
         $(".next-thread").on("click", function(){
             //scrolllocation = ($("idArray").position()).top;
