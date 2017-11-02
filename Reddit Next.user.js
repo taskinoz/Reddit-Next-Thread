@@ -12,10 +12,26 @@
 (function() {
     'use strict';
     //Initialize Variables
-    var threads, current, scrolllocation;
+    var threads, current, scrolllocation, smallestDiff, currentDiff, closest, scrollTo;
     var postracker = 0;
     var idArray = ["buffer"];
-    var heightArray = ["buffer"];
+    var heightArray = [];
+    var scrolling = window.scrollY;
+
+    //Look for closest thread
+    function compare(a,b) {
+      smallestDiff = Math.abs(b - a[0]);
+      closest = 0; //index of the current closest number
+
+      for (var d = 1; d < a.length; d++) {
+        currentDiff = Math.abs(b - a[d]);
+        if (currentDiff < smallestDiff) {
+          smallestDiff = currentDiff;
+          closest = d;
+        }
+      }
+      return closest;
+    }
 
     //Add Fontawesome and Next Arrow
     if (($(".sitetable.nestedlisting > .thing").length)>=1){
@@ -68,16 +84,25 @@
         heightArray.push($("#"+($(current).attr("id"))).position().top);
         current = $(current).next().next();
     }
-    console.log(idArray);
-    console.log(heightArray);
     $(document).ready(function(){
         $(".next-thread").on("click", function(){
-            //scrolllocation = ($("idArray").position()).top;
-            document.location.href = "#"+idArray[postracker];
-            postracker++;
+            if (Math.floor(scrolling) == Math.floor(window.scrollY)){
+              //document.location.href = "#"+idArray[postracker];
+              scrollTo = "#"+idArray[postracker+1];
+              postracker++;
+              console.log("if");
+            }
+            else {
+              scrollTo = "#"+idArray[(compare(heightArray,window.scrollY))+1];
+              postracker = compare(heightArray,window.scrollY)+1;
+              console.log("else");
+            }
+            scrolling = Math.floor($(scrollTo).offset().top);
+            console.log("Current Scroll: "+window.scrollY);
+            console.log("Scrolling: "+scrolling);
             //Animated scroll
             $('html, body').animate({
-                scrollTop: $("#"+idArray[postracker]).offset().top
+                scrollTop: $(scrollTo).offset().top
             }, 500);
         });
     });//End $(document).ready()
