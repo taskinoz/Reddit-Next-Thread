@@ -74,36 +74,55 @@
         });
     }
 
-
-    threads = $(".sitetable.nestedlisting > .thing").length;
-    //console.log(threads);
-
-    current = $(".sitetable.nestedlisting > .thing");
-    for (var i=1;i<=threads;i++){
-        idArray.push($(current).attr("id"));
-        heightArray.push($("#"+($(current).attr("id"))).position().top);
-        current = $(current).next().next();
+    function getThreadIds() {
+      threads = $(".sitetable.nestedlisting > .thing").length;
+      current = $(".sitetable.nestedlisting > .thing");
+      for (var i=1;i<=threads;i++){
+          idArray.push($(current).attr("id"));
+          heightArray.push($("#"+($(current).attr("id"))).position().top);
+          if ($(current).next().next().attr("id") !== "morecomments"){
+            current = $(current).next().next();
+          }
+          // else {
+          //   current = $(current).next().next().next().next();
+          // }
+      }
     }
     $(document).ready(function(){
+        //Get thread ID's
+        getThreadIds();
+        //Load more thread ID's
+        $(".morecomments").on("click", function(){
+          //Reset array
+          idArray = ["buffer"];
+          setTimeout(getThreadIds,5000);
+          console.log(idArray);
+        });
         $(".next-thread").on("click", function(){
+            //If you haven't scrolled
             if (Math.floor(scrolling) == Math.floor(window.scrollY)){
-              //document.location.href = "#"+idArray[postracker];
+              //Set scrollTo to the next thread
               scrollTo = "#"+idArray[postracker+1];
               postracker++;
-              console.log("if");
+              console.log("P:"+postracker+" A:"+idArray.length);
             }
+            //If you have scrolled
             else {
+              //Set scrollTo to the nerest thread by comparing array to element height
               scrollTo = "#"+idArray[(compare(heightArray,window.scrollY))+1];
               postracker = compare(heightArray,window.scrollY)+1;
-              console.log("else");
+              console.log("P:"+postracker+" A:"+idArray.length);
             }
-            scrolling = Math.floor($(scrollTo).offset().top);
-            console.log("Current Scroll: "+window.scrollY);
-            console.log("Scrolling: "+scrolling);
-            //Animated scroll
-            $('html, body').animate({
-                scrollTop: $(scrollTo).offset().top
-            }, 500);
+
+            //Stop it from scrolling if it reaches the end
+            if((postracker+1)<=idArray.length){
+              //Set scroll
+              scrolling = Math.floor($(scrollTo).offset().top);
+              //Animated scroll
+              $('html, body').animate({
+                  scrollTop: $(scrollTo).offset().top
+              }, 500);
+            }
         });
     });//End $(document).ready()
 })(); //End Tampermonkey Script
