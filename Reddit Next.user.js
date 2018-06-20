@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name         Reddit Next
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       You
+// @version      0.2
+// @description  Porting the functionality of the Reddit mobile app to the desktop
+// @author       Taskinoz
 // @match        https://www.reddit.com/*
 // @match        https://reddit.com/*
+// @match        https://old.reddit.com/*
 // @grant        none
+// @require      http://code.jquery.com/jquery-1.12.4.min.js
 // ==/UserScript==
 
 (function() {
