@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Reddit Next
-// @namespace    http://tampermonkey.net/
+// @namespace    https://taskinoz.com/
 // @version      0.2
 // @description  Porting the functionality of the Reddit mobile app to the desktop
 // @author       Taskinoz
