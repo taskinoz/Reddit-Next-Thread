@@ -7,6 +7,7 @@
 // @match        https://www.reddit.com/*
 // @match        https://reddit.com/*
 // @match        https://old.reddit.com/*
+// @exclude      */submit
 // @grant        none
 // @require      http://code.jquery.com/jquery-1.12.4.min.js
 // ==/UserScript==
