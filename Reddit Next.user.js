@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Reddit Next
 // @namespace    https://taskinoz.com/
-// @version      0.3
+// @version      0.4
 // @description  Porting the functionality of the Reddit mobile app to the desktop
 // @author       Taskinoz
 // @match        https://www.reddit.com/*
